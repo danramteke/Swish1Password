@@ -3,6 +3,8 @@ import SwishKit
 
 public final class OP {
 
+  public init() {}
+
   public func get(item: String, vault: String, fields: String) throws -> String {
     let cmd =
     """
