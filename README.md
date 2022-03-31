@@ -9,8 +9,22 @@ SwishKit plugin of 1Password CLI. Requires version 2 of the 1Password CLI. Downl
 Fetch a key out of 1Password and upload it to Heroku secret config variables.
 
     let op = OP()
-    let key = try op.get(item: "Server", vault: "MyProjectVault", section: "Signing Keys", field: "JWT Signing Key")
-    try sh(.terminal, #"heroku config:set JWT_SIGNING_KEY="$JWT_SIGNING_KEY"#, enviroment: ["JWT_SIGNING_KEY": key])
+    
+    
+    // fetch key
+    let key = try op.get(item: "Server", 
+                         vault: "MyProjectVault", 
+                         section: "Signing Keys", 
+                         field: "JWT Signing Key")
+    
+    // upload to heroku    
+    let environment: [String: String] = [
+        "JWT_SIGNING_KEY": key
+    ]
+    
+    let cmd: String = #"heroku config:set JWT_SIGNING_KEY="$JWT_SIGNING_KEY""#
+    
+    try sh(.terminal, cmd, enviroment: environment)
 
 ### Example `Package.swift`
 
@@ -31,6 +45,6 @@ Fetch a key out of 1Password and upload it to Heroku secret config variables.
                 dependencies: [
                     .product(name: "SwishKit", package: "Swish"),
                     .product(name: "Swish1Password", package: "swish-1password"),
-                    ]),
+                ]),
         ]
     )
