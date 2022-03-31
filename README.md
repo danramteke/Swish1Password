@@ -1,5 +1,7 @@
 # Swish 1Password
-SwishKit plugin of 1Password CLI. Requires version 2 of the 1Password CLI. Download it here: https://1password.com/downloads/command-line/
+SwishKit plugin of 1Password CLI. Requires version 2 of the 1Password CLI, available from https://1password.com/downloads/command-line/
+
+Swish is a tool for running command line tools from Swift programs. Find out more about Swish from https://github.com/danramteke/swish
 
 ## Example
 
@@ -8,9 +10,11 @@ SwishKit plugin of 1Password CLI. Requires version 2 of the 1Password CLI. Downl
 
 Fetch a key out of 1Password and upload it to Heroku secret config variables.
 
+    import SwishKit
+    import Swish1Password
+    
     let op = OP()
-    
-    
+        
     // fetch key
     let key = try op.get(item: "Server", 
                          vault: "MyProjectVault", 
