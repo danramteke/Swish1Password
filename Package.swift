@@ -11,9 +11,11 @@ let package = Package(
     .library(name: "Swish1Password", targets: ["Swish1Password"])
   ],
   dependencies: [
-    .package(url: "https://github.com/danramteke/Swish.git", branch: "1.2.2"),
+    .package(url: "https://github.com/danramteke/Swish.git", from: "1.2.2"),
   ],
   targets: [
-    .target(name: "Swish1Password", dependencies: [.product(name: "SwishKit", package: "Swish")])
+    .target(name: "Swish1Password", dependencies: [
+      .product(name: "SwishKit", package: "Swish")
+    ])
   ]
 )
