@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "e0dada9cd44e3fa7ec3b867e49a8ddbf543e3df3",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "Swish",
+        "repositoryURL": "https://github.com/danramteke/Swish.git",
+        "state": {
+          "branch": "1.2.2",
+          "revision": "492501c7c18430b3c6f2220831a83499f42d8a5e",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
