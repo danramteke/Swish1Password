@@ -17,6 +17,19 @@ public final class OP {
     }
   }
 
+  // async version
+  public func get(item: String, vault: String, fields: String) async throws -> String {
+    let cmd =
+    """
+    op item get "\(item)" --vault "\(vault)" --fields "\(fields)"
+    """
+    if let value = try await sh(cmd) {
+      return value
+    } else {
+      throw ItemFieldsNotFoundError(item: item, vault: vault, fields: fields)
+    }
+  }
+
   public func get(item: String, vault: String, section: String, field: String) throws -> String {
 
     let output = try self.get(item: item, vault: vault)
@@ -25,6 +38,18 @@ public final class OP {
       throw FieldNotFoundError(item: item, vault: vault, section: section, field: field)
     }
 
+    return value
+  }
+  
+  // async version
+  public func get(item: String, vault: String, section: String, field: String) async throws -> String {
+    
+    let output = try await self.get(item: item, vault: vault)
+    
+    guard let value = output.valueOf(field: field, section: section) else {
+      throw FieldNotFoundError(item: item, vault: vault, section: section, field: field)
+    }
+    
     return value
   }
 
@@ -36,6 +61,16 @@ public final class OP {
     return try sh(Output.self, cmd)
   }
 
+  
+  // async version
+  public func get(item: String, vault: String) async throws -> Output {
+    let cmd =
+    """
+    op item get "\(item)" --vault "\(vault)" --format json
+    """
+    return try await sh(Output.self, cmd)
+  }
+  
   public struct ItemFieldsNotFoundError: Error {
     public let item: String, vault: String, fields: String
   }
