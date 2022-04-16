@@ -1,5 +1,5 @@
 import Foundation
-import SwishKit
+import Swish
 
 public final class OP {
 
@@ -40,16 +40,16 @@ public final class OP {
 
     return value
   }
-  
+
   // async version
   public func get(item: String, vault: String, section: String, field: String) async throws -> String {
-    
+
     let output = try await self.get(item: item, vault: vault)
-    
+
     guard let value = output.valueOf(field: field, section: section) else {
       throw FieldNotFoundError(item: item, vault: vault, section: section, field: field)
     }
-    
+
     return value
   }
 
@@ -61,7 +61,7 @@ public final class OP {
     return try sh(Output.self, cmd)
   }
 
-  
+
   // async version
   public func get(item: String, vault: String) async throws -> Output {
     let cmd =
@@ -70,7 +70,7 @@ public final class OP {
     """
     return try await sh(Output.self, cmd)
   }
-  
+
   public struct ItemFieldsNotFoundError: Error {
     public let item: String, vault: String, fields: String
   }
